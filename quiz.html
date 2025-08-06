@@ -1,12 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz - Nível Médio </title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz - Nível Médio</title>
+
+  <!-- Link do CSS (você pode manter também num arquivo externo style.css) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Estilo da página */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0D1B2A;
+      color: white;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Cabeçalho do site */
+    header {
+      background-color: #1B263B;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #A9A9A9;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    /* Área do quiz */
+    main.quiz {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .dica {
+      background-color: #A9A9A9;
+      color: #0D1B2A;
+      padding: 0.8rem;
+      border-radius: 5px;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+    }
+
+    .pergunta {
+      font-size: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    /* Botões de resposta */
+    .respostas button {
+      margin: 1rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #1B263B;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .respostas button:hover {
+      background-color: #415A77;
+    }
+
+    /* Resultado abaixo da resposta */
+    #resultado {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    /* Botão de finalizar quiz */
+    .btn-finalizar {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background-color: #A9A9A9;
+      color: #0D1B2A;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-finalizar:hover {
+      background-color: #6e6e6e;
+    }
+  </style>
 </head>
 <body>
+  <!-- Cabeçalho com logo e menu -->
   <header>
     <div class="logo">Quiz Crimes Virtuais</div>
     <nav>
@@ -16,143 +115,109 @@
     </nav>
   </header>
 
+  <!-- Área principal do quiz -->
   <main class="quiz">
-    <div class="dica">Dica: Atenção com mensagens que pedem senhas.</div>
-    <h2 class="pergunta">Enviar um e-mail fingindo ser uma empresa confiável para coletar dados bancários do destinatário configura um tipo de fraude virtual?</h2>
+    <!-- Dica da pergunta -->
+    <div class="dica" id="dica">Dica: </div>
 
+    <!-- Pergunta atual -->
+    <h2 class="pergunta" id="pergunta">Pergunta aqui</h2>
+
+    <!-- Botões de resposta -->
     <div class="respostas">
       <button onclick="responder(true)">É crime</button>
       <button onclick="responder(false)">Não é crime</button>
     </div>
 
+    <!-- Resultado da resposta -->
     <div id="resultado"></div>
-    <footer>
-      <button onclick="verPontuacao()">Ver Pontuação</button>
-    </footer>
+
+    <!-- Botão que aparece no final -->
+    <button class="btn-finalizar" onclick="verPontuacao()" style="display:none;">Ver Pontuação</button>
   </main>
-  <script src="script.js"></script>
+
+  <!-- Script JavaScript -->
+  <script>
+    // Lista de perguntas do nível médio
+    const perguntas = [
+      {
+        texto: "Enviar um e-mail fingindo ser uma empresa confiável para coletar dados bancários do destinatário configura um tipo de fraude virtual?",
+        dica: "Atenção com mensagens que pedem senhas.",
+        correta: true
+      },
+      {
+        texto: "Compartilhar um meme usando a imagem de outra pessoa sem autorização pode ser considerado crime?",
+        dica: "Nem tudo na internet é 'brincadeira'.",
+        correta: true
+      },
+      {
+        texto: "Baixar músicas de sites sem autorização dos autores é permitido por lei?",
+        dica: "Pense sobre direitos autorais.",
+        correta: false
+      }
+    ];
+
+    // Índice da pergunta atual e pontuação do jogador
+    let indice = 0;
+    let score = 0;
+
+    // Mostra a pergunta atual na tela
+    function mostrarPergunta() {
+      const perguntaAtual = perguntas[indice];
+      document.getElementById("pergunta").textContent = perguntaAtual.texto;
+      document.getElementById("dica").textContent = "Dica: " + perguntaAtual.dica;
+      document.getElementById("resultado").textContent = "";
+    }
+
+    // Verifica se a resposta está correta
+    function responder(respostaUsuario) {
+      const correta = perguntas[indice].correta;
+      const resultado = document.getElementById("resultado");
+
+      // Verifica e mostra se a resposta foi certa ou errada
+      if (respostaUsuario === correta) {
+        resultado.textContent = "✅ Resposta correta!";
+        resultado.style.color = "lightgreen";
+        score++;
+      } else {
+        resultado.textContent = "❌ Resposta incorreta.";
+        resultado.style.color = "red";
+      }
+
+      // Passa para a próxima pergunta
+      indice++;
+
+      // Desativa os botões por 1.5s
+      const botoes = document.querySelectorAll(".respostas button");
+      botoes.forEach(btn => btn.disabled = true);
+
+      // Espera 1.5s e avança
+      setTimeout(() => {
+        botoes.forEach(btn => btn.disabled = false);
+
+        if (indice < perguntas.length) {
+          mostrarPergunta(); // mostra próxima
+        } else {
+          // Fim do quiz: mostra pontuação e botão
+          document.querySelector(".btn-finalizar").style.display = "inline-block";
+          document.querySelector(".respostas").style.display = "none";
+          document.getElementById("pergunta").textContent = "Quiz concluído!";
+          document.getElementById("dica").textContent = "";
+          document.getElementById("resultado").textContent = `Você acertou ${score} de ${perguntas.length} pergunta(s).`;
+        }
+      }, 1500);
+    }
+
+    // Salva pontuação no localStorage e vai para a página de pontuação
+    function verPontuacao() {
+      localStorage.setItem("score", score); // Salva acertos
+      localStorage.setItem("total", perguntas.length); // Salva total de perguntas
+      window.location.href = "pontuacao.html"; // Redireciona
+    }
+
+    // Começa mostrando a primeira pergunta
+    mostrarPergunta();
+  </script>
 </body>
 </html>
-  
-  <style>
-  
-  /* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #0D1B2A;
-  color: white;
-  min-height: 100vh;
-}
-
-/* Cabeçalho */
-
-* header {
-  background-color: #1B263B;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-nav a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #A9A9A9;
-  font-weight: 500;
-}
-
-/* Página Inicial */
-main.home {
-  padding: 2rem;
-  text-align: center;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.btn {
-  background-color: #1B263B;
-  padding: 1rem 2rem;
-  border: none;
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.btn:hover {
-  background-color: #415A77;
-}
-
-/* Página Quiz */
-main.quiz {
-  padding: 2rem;
-  text-align: center;
-}
-
-.dica {
-  background-color: #A9A9A9;
-  color: #0D1B2A;
-  padding: 0.8rem;
-  border-radius: 5px;
-  margin-bottom: 1.5rem;
-}
-
-.pergunta {
-  font-size: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-.respostas button {
-  margin: 1rem;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #1B263B;
-  color: white;
-  cursor: pointer;
-}
-
-.respostas button:hover {
-  background-color: #415A77;
-}
-
-#resultado {
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
-}
-
-footer {
-  margin-top: 2rem;
-}
-
-.btn-voltar {
-  padding: 0.8rem 1.5rem;
-  background-color: #A9A9A9;
-  color: #0D1B2A;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-</style>
