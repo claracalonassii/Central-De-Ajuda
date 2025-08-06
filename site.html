@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Ajuda</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">Quiz Crimes Virtuais</div>
+    <nav>
+      <a href="pontuacao.html">Pontuação</a>
+      <a href="#">Ajuda</a>
+      <a href="#">Perfil</a>
+    </nav>
+  </header>
+
+  <main class="ajuda">
+    <h2>Central de Ajuda</h2>
+    <p>Este quiz tem como objetivo informar sobre crimes cibernéticos. Leia atentamente as perguntas e clique na alternativa correta.</p>
+    <p>Cada acerto vale 1 ponto. Você pode acompanhar sua pontuação no topo das páginas.</p>
+  </main>
+</body>
+</html>
+ 
+  <style>
+ 
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0D1B2A;
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #1B263B;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #A9A9A9;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #FFFFFF;
+}
+
+main.home, main.quiz, main.pontuacao, main.ajuda {
+  padding: 2rem;
+  text-align: center;
+  background-color: #FFFFFF;
+  color: #0D1B2A;
+  min-height: calc(100vh - 80px);
+}
+
+h1, h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  background-color: #1B263B;
+  padding: 1rem 2rem;
+  border: none;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #415A77;
+}
+
+.dica {
+  background-color: #A9A9A9;
+  color: #0D1B2A;
+  padding: 0.8rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.pergunta {
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.respostas button {
+  margin: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #1B263B;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.respostas button:hover {
+  background-color: #415A77;
+}
+
+#resultado {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+footer button, .btn-voltar {
+  padding: 0.8rem 1.5rem;
+  background-color: #A9A9A9;
+  color: #0D1B2A;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+footer button:hover, .btn-voltar:hover {
+  background-color: #6e6e6e;
+} 
+
+</style>
+</body>
+</html>
